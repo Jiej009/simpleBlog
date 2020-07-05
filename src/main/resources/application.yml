@@ -1,1 +1,9 @@
+mybatis:
+  mapper-locations: classpath*:xyz/jiej/simpleblog/simple_blog/mapper/blog.xml
 
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
