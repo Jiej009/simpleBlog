@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>simple bolg</title>
+    <script src="/js/jquery/jquery.js"></script>
+    <style>
+        body {
+            background-color: white;
+        }
+        .div-articleList {
+            min-height: 700px;
+            width:35%;
+            height: max-content;
+            float:left;
+        }
+        .div-content-articleList {
+            max-width: 280px;
+            margin-right: 67px;
+            float:right;
+        }
+        .div-content {
+            background-color: #DDD;
+            width: 64%;
+            float:right;
+        }
+        .div-name {
+            cursor: pointer;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            border-bottom:1px solid #DDD;
+        }
+        .div-name:hover {
+            color: #AAA;
+        }
+        #contentDiv {
+            min-height: 700px;
+            width: 790px;
+            background-color: white;
+            margin-top: 100px;
+            margin-left: 80px;
+            padding: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="div-articleList">
+        <div class="div-content-articleList">
+            <h2 style="margin-top: 100px;margin-bottom: 100px;">万圣节的博客</h2>
+            <h3>近期文章</h3>
+            <div id="articleList"></div>
+        </div>
+    </div>
+    <div class="div-content">
+        <div id="contentDiv"></div>
+    </div>
+
+</body>
+<script>
+    $(function() {
+        getArticleList();
+    })
+
+    function getArticleList() {
+        $.get("/blog/list", function(r) {
+            var articleListStr = "";
+            var firstId;
+            for (var i of r.list) {
+                var str = `<div class="div-name" onclick="showBlogInfo(${i.id})">${i.name}</div>`;
+                articleListStr += str;
+                if (!firstId) firstId = i.id;
+            }
+            $("#articleList").html(articleListStr);
+            showBlogInfo(firstId);
+        });
+    }
+
+    function showBlogInfo(id) {
+        $.get("/blog/info", {'id':id}, function(r) {
+            console.log(r.content);
+            var str = `<h1>${r.name}</h1><div>${r.content}</div>`;
+            $("#contentDiv").html(str);
+        });
+    }
+</script>
+</html>

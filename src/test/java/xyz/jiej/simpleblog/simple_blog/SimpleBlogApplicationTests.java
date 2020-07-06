@@ -3,8 +3,8 @@ package xyz.jiej.simpleblog.simple_blog;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import xyz.jiej.simpleblog.simple_blog.dao.BlogDao;
-import xyz.jiej.simpleblog.simple_blog.entity.Blog;
+import xyz.jiej.simpleblog.simple_blog.blog.dao.BlogDao;
+import xyz.jiej.simpleblog.simple_blog.blog.entity.Blog;
 
 import java.util.List;
 
