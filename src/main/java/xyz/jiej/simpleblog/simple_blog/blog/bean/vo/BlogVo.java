@@ -1,24 +1,25 @@
-package xyz.jiej.simpleblog.simple_blog.entity;
+package xyz.jiej.simpleblog.simple_blog.blog.bean.vo;
 
+import org.springframework.beans.BeanUtils;
+import xyz.jiej.simpleblog.simple_blog.blog.entity.Blog;
+
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Blog {
+/**
+ * @description:
+ * @author: TK
+ * @time: 2020/7/6 10:48 上午
+ */
+public class BlogVo implements Serializable {
 
     private int id;
     private String name;
     private int status;
-    private Timestamp createTime;
     private Timestamp updateTime;
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", status=" + status +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                '}';
+    public BlogVo(Blog blog) {
+        BeanUtils.copyProperties(blog, this);
     }
 
     public int getId() {
@@ -43,14 +44,6 @@ public class Blog {
 
     public void setStatus(int status) {
         this.status = status;
-    }
-
-    public Timestamp getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Timestamp createTime) {
-        this.createTime = createTime;
     }
 
     public Timestamp getUpdateTime() {

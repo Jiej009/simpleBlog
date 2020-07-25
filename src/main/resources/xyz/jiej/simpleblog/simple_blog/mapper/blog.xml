@@ -2,18 +2,41 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="xyz.jiej.simpleblog.simple_blog.dao.BlogDao">
+<mapper namespace="xyz.jiej.simpleblog.simple_blog.blog.dao.BlogDao">
 
-    <resultMap id="BlogResultMap" type="xyz.jiej.simpleblog.simple_blog.entity.Blog">
+    <resultMap id="BlogResultMap" type="xyz.jiej.simpleblog.simple_blog.blog.entity.Blog">
         <!-- 用id属性来映射主键字段 -->
 <!--        <id column="_id" jdbcType="VARCHAR" property="id" />-->
         <!-- 用result属性来映射非主键字段 -->
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     </resultMap>
+    <resultMap id="BlogContentResultMap" type="xyz.jiej.simpleblog.simple_blog.blog.entity.BlogContent">
+        <!-- 用id属性来映射主键字段 -->
+        <!--        <id column="_id" jdbcType="VARCHAR" property="id" />-->
+        <!-- 用result属性来映射非主键字段 -->
+        <result column="blog_id" jdbcType="SMALLINT" property="blogId" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
 
-    <select id="findAll" resultType="xyz.jiej.simpleblog.simple_blog.entity.Blog" resultMap="BlogResultMap">
+    <select id="findAll" resultType="xyz.jiej.simpleblog.simple_blog.blog.entity.Blog" resultMap="BlogResultMap">
         select * from blog.blog
+        order by update_time desc
+    </select>
+
+    <select id="showContent" resultType="xyz.jiej.simpleblog.simple_blog.blog.entity.BlogContent" resultMap="BlogContentResultMap" parameterType="int">
+        select * from blog.blog_content
+        <where>
+            blog_id = #{id}
+        </where>
+    </select>
+
+    <select id="findBlog" resultType="xyz.jiej.simpleblog.simple_blog.blog.entity.Blog" resultMap="BlogResultMap">
+        select * from blog.blog
+        <where>
+            id = #{id}
+        </where>
     </select>
 
 </mapper>
