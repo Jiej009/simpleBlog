@@ -16,10 +16,14 @@ class SimpleBlogApplicationTests {
 
     @Test
     void contextLoads() {
-
         List<Blog> all = blogDao.findAll();
         System.out.println(all);
+    }
 
+    @Test
+    void test1() {
+        Blog blog = blogDao.find();
+        System.out.println(blog);
     }
 
 }

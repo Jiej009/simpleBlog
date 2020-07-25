@@ -1,5 +1,5 @@
 mybatis:
-  mapper-locations: classpath*:xyz/jiej/simpleblog/simple_blog/mapper/blog.xml
+  mapper-locations: classpath*:xyz/jiej/simpleblog/simple_blog/mapper/*.xml
 
 spring:
   datasource:
